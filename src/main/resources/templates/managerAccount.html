@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>ShadowREM</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="icon" href="">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+		<!-- <script th:inline="javascript">
+            /*<![CDATA[*/
+                let manager = [[${manager}]];
+                sessionStorage.setItem('manager', manager);
+                console.log(manager);
+            /*]]>*/
+        </script> -->
+	</head>
+	<body>
+		<div class="jumbotron text-center">
+			<h2>Hello, [[${manager.name}]]!</h2>
+		</div>
+		
+		<div class="well text-center">
+			<form action="" method="post">
+				<input type="hidden" th:field="${manager.managerId}"/>
+				<div>
+					Username: <input type="text" th:field="${manager.username}" />
+				</div>
+				<div>
+					Password: <input type="password" th:field="${manager.password}" />
+				</div>
+				<br>
+				<div>
+					<input type="submit" value="Update Account" />
+				</div>
+			</form>
+
+			<hr/>
+
+			<form th:action="@{/tenants/new}" method="get">
+				<h2>Tenants</h2>
+				<div th:each="tenant : ${tenants}">
+					<a th:href= "@{/tenant/{tenantId}(tenantId=${tenant.tenantId})}" th:text="${tenant.name}" method="get" ></a>
+				</div>
+				<!-- <input type="submit" value="New Tenant" /> -->
+			</form>
+
+			<hr/>
+
+			<form th:action="@{/unit/new}" method="get">
+				<h2>Units</h2>
+				<div th:each="unit : ${units}">
+					<a th:href= "@{/unit/{unitId}(unitId=${unit.unitId})}" th:text="${unit.addressLine1}" method="get" ></a>
+				</div>
+				<input type="submit" value="New Unit" /> 
+			</form>
+
+			<hr/>
+
+			<div>
+				<a href="/logout">Logout</a>
+			</div>
+		</div>
+
+		    <!-- <form th:action="@{/users/{userId}/delete(userId=${user.userId})}" method="post">
+				<input type="submit" value="Delete User Account" />
+			</form> --> 
+
+            <!-- <div>
+                <a th:href="@{tenant/unit/{unitId}(unitId=${tenant.unit.unitId})}" th:text="${tenant.unit.addressLine1}"></a>
+            </div> -->
+			<!-- <form th:action="@{/users/{userId}/accounts(userId=${user.userId})}" method="post">
+				<h2>Accounts</h2>
+				<div th:each="account : ${user.accounts}">
+					<a th:href= "@{/users/{userId}/accounts/{accountId}(userId=${user.userId}, accountId=${account.accountId})}" th:text="${account.accountName}" method ></a>
+				</div>
+				<input type="submit" value="Open New Account" />
+			</form> -->
+		
+		<!-- <div th:unless="${#lists.size(users) == 1}" th:each="user : ${users}">
+		    <a th:href= "@{/users/{userId}(userId=${user.userId})}" th:text="${user.userId}"></a><br/>
+			<span th:text="${user.username}"></span><br/>
+			<span th:text="${user.name}"></span><br/>
+			<span th:text="${user.password}"></span>
+			<div th:each="account : ${user.accounts}">
+				<a th:href= "@{/users/{userId}/accounts/{accountId}(userId=${user.userId}, accountId=${account.accountId})}" th:text="${account.accountName}"></a>
+			</div>
+			<hr/>
+		</div> -->
+	</body>
+</html>

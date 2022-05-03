@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>ShadowREM</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="icon" href="">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+	</head>
+	<body>
+		<div class="jumbotron text-center">
+			<h1>Welcome to ShadowREM!</h1>
+			<br>
+		</div>
+
+		<div class="well text-center">
+			<h4>Create a tenant account:</h4>
+			<br>
+			<form action="" method="post" id="register">
+				<div>
+					<label for="username">Username: </label> 
+					<input id="username" type="text" th:field="${userDTO.username}" required/>
+				</div>
+				<div>
+					<label for="password">Password: </label> 
+					<input id="password" type="password" th:field="${userDTO.password}" required/>
+				</div>
+				<div>
+					<label for="name">Name: </label> 
+					<input id="name" type="text" th:field="${userDTO.name}" required/>
+				</div>
+				<div>
+					<input type="submit" value="Create" />
+				</div>
+			</form>
+			<br>
+			<a href="/login">Back</a>
+		</div>
+        <script type="text/javascript" src="/register.js"></script>
+	</body>
+</html>

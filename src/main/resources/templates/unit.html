@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<title th:text= "${unit.addressLine1}"></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="icon" href="">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+        <div class="jumbotron text-center">
+			<h2 th:text= "${unit.addressLine1}"></h2>
+		</div>
+
+        <!-- private Long unitId;
+	private String addressLine1;
+	private String addressLine2;
+	private String city;
+	private String state;
+	private String zipCode;
+	private Tenant tenant;
+	private Manager manager;-->
+		
+        <div class="well text-center">
+            <form action="" method="post">
+                <div>
+                    Address Line 1: <input type="text" th:field="${unit.addressLine1}" />
+                </div>
+                <div>
+                    Address Line 2: <input type="text" th:field="${unit.addressLine2}" />
+                </div>
+                <div>
+                    City: <input type="text" th:field="${unit.city}" />
+                </div>
+                <div>
+                    State: <input type="text" th:field="${unit.state}" />
+                </div>
+                <div></div>
+                    Zip Code: <input type="text" th:field="${unit.zipCode}" />
+                    <!-- Tenant: <input type="text" th:field="${account.accountName}" /> -->
+                    <!-- Manager: <input type="text" th:field="${account.accountName}" /> -->
+
+                </div>
+
+                <div>
+                    <input type="submit" value="Save Unit"/>
+                </div>
+            </form>
+            <hr/>
+            <div>
+                <!-- <a href="/manager">Back</a> -->
+            </div>
+        </div>
+	</body>
+</html>
