@@ -18,7 +18,6 @@ Features
     (MVP) View/Update account info
 
     Tenants can...
-    (MVP) View property details
 
     Managers can...
     (MVP) View/Update all tenants
@@ -31,6 +30,7 @@ To-do list:
     Access payment portal
 
     Tenants can...
+    View unit details
     Request maintenance tickets
 
     Managers can...
