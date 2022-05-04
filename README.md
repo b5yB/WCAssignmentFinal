@@ -1,7 +1,8 @@
 # WCAssignmentFinal
 
-##Overview
-ShadowREM is a real estate management tool for property managers and their tenants. 
+Overview
+
+    ShadowREM is a real estate management tool for property managers and their tenants. 
 
 
 Technologies Used
@@ -10,7 +11,7 @@ Technologies Used
     JavaScript 
     Spring Data + MySQL
 
-##Features
+Features
 
     Users can...
     (MVP) Login
