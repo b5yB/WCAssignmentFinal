@@ -32,13 +32,13 @@ public class UnitController {
 		return uServ.findAllUnits();
 	}
 	
-	@GetMapping("/unit/new")
+	@PostMapping("/unit/new")
 	public String getNewUnit (ModelMap model) {
 		Unit unit = new Unit();
 		//unit.setManager(mServ.findById(1L));
 		uServ.saveUnit(unit);
 		model.put("unit", unit);
-		return "unit";
+		return "redirect:/unit/"+unit.getUnitId();
 	}
 	
 	@GetMapping("/unit/{unitId}")
@@ -49,23 +49,12 @@ public class UnitController {
 	}
 	
 	@PostMapping("/unit/{unitId}")
-	public String postUnit (@PathVariable Long managerId, Unit unit) {
+	public String postUnit (@PathVariable Long unitId, Unit unit) {
 		uServ.saveUnit(unit);
-		return "redirect:/unit/"+unit.getUnitId();
+		return "redirect:/manager/"+1;
 	}
 	
-	@PostMapping("/unit/{unitId}/assign/{tenantId}")
-	public Unit assignUnit (@PathVariable Long unitId, @PathVariable Long tenantId) {
-		Unit unit = uServ.findById(unitId);
-		Tenant tenant = tServ.findById(tenantId);
-		
-		unit.setTenant(tenant);
-		tenant.setUnit(unit);
-		
-		tServ.saveTenant(tenant);
-		uServ.saveUnit(unit);
-		
-		return unit;
-	}
+	
+	
 	
 }

@@ -27,8 +27,8 @@ public class TenantService {
 		return tRepo.findById(tenantId).orElse(new Tenant());
 	}
 	
-	public Tenant findByUsername (UserDTO user) {
-		Tenant t = tRepo.findByUsername(user.getUsername());
+	public Tenant findByUsername (String username) {
+		Tenant t = tRepo.findByUsername(username);
 		if (t != null) {
 			return t;
 		}

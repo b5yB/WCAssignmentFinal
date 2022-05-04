@@ -37,17 +37,17 @@
 
 			<hr/>
 
-			<form th:action="@{/tenants/new}" method="get">
+			<form th:action="@{/tenant/new}" method="get">
 				<h2>Tenants</h2>
 				<div th:each="tenant : ${tenants}">
-					<a th:href= "@{/tenant/{tenantId}(tenantId=${tenant.tenantId})}" th:text="${tenant.name}" method="get" ></a>
+					<a th:href= "@{/manager/tenant/{tenantId}(tenantId=${tenant.tenantId})}" th:text="${tenant.name}" method="get" ></a>
 				</div>
 				<!-- <input type="submit" value="New Tenant" /> -->
 			</form>
 
 			<hr/>
 
-			<form th:action="@{/unit/new}" method="get">
+			<form th:action="@{/unit/new}" method="post">
 				<h2>Units</h2>
 				<div th:each="unit : ${units}">
 					<a th:href= "@{/unit/{unitId}(unitId=${unit.unitId})}" th:text="${unit.addressLine1}" method="get" ></a>

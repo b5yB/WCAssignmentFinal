@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Tenant {
 
@@ -69,10 +71,11 @@ public class Tenant {
 		this.unit = unit;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "Tenant [tenantId=" + tenantId + ", username=" + username + ", password=" + password + ", manager="
-				+ manager + ", unit=" + unit + "]";
+		return "Tenant [tenantId=" + tenantId + ", credential=" + credential + ", username=" + username + ", password="
+				+ password + ", name=" + name + ", manager=" + manager + ", unit=" + unit + "]";
 	}
 	@Override
 	public int hashCode() {

@@ -21,22 +21,34 @@
 		
 		<div class="well text-center">
 			<form action="" method="post">
-				<input type="hidden" th:field="${tenant.tenantId}"/>
+				<input type="hidden" th:field="${tenantDTO.tenantId}"/>
 				<!-- <input type="hidden" th:field="${tenant.manager.managerId}"/>
 				<input type="hidden" th:field="${tenant.unit.unitId}"/> -->
 				<div>
-					Username: <input type="text" th:field="${tenant.username}" />
+					Current Username: [[${tenant.username}]] <br/>
+					New Username: 
+					<input type="text" th:field="${tenantDTO.username}" />
                 </div>
+				<hr/>
                 <div>
-					Password: <input type="password" th:field="${tenant.password}" />
+					New Password: 
+					<input type="password" th:field="${tenantDTO.password}" />
                 </div>
+				<hr/>
                 <div>
-                    Name: <input type="text" th:field="${tenant.name}" />
+                    Current Name: [[${tenant.username}]] <br/>
+					New Name: 
+					<input type="text" th:field="${tenantDTO.name}" />
                 </div>
+				<hr/>
                 <div>
-                    Unit: <input type="text" th:field="${tenant.unit}" />
+					Unit: 
+					<select th:field="${tenantDTO.unitId}" class>
+						<option selected value="">Assign a unit...</option>
+						<option th:each="unit : ${units}" th:value="${unit.unitId}" th:text="${unit.addressLine1}"></option>
+					</select>
 				</div>
-				<br>
+				<hr/>
 				<div>
 					<input type="submit" value="Update Tenant" />
 				</div>

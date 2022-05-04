@@ -16,13 +16,16 @@
 		<div class="well text-center">
 			<form action="" method="post">
 				<input type="hidden" th:field="${tenant.tenantId}"/>
-				<input type="hidden" th:field="${tenant.manager.managerId}"/>
-				<input type="hidden" th:field="${tenant.unit.unitId}"/>
+				<!-- <input type="hidden" th:field="${tenant.manager.managerId}"/> -->
+				<!-- <input type="hidden" th:field="${tenant.unit.unitId}"/> -->
 				<div>
 					Username: <input type="text" th:field="${tenant.username}" />
 				</div>
 				<div>
 					Password: <input type="password" th:field="${tenant.password}" />
+				</div>
+				<div>
+					Name: <input type="text" th:field="${tenant.name}" />
 				</div>
 				<br>
 				<div>
@@ -33,8 +36,8 @@
 				<input type="submit" value="Delete User Account" />
 			</form> --> 
 			<hr/>
-            <div>
-                <a th:href="@{tenant/unit/{unitId}(unitId=${tenant.unit.unitId})}" th:text="${tenant.unit.addressLine1}"></a>
+            <div th:if="${tenant.unit!=null}">
+                <a th:href="@{tenant/{tenantId}/unit/{unitId}(tenantId=${tenant.tenantId}, unitId=${tenant.unit.unitId})}" th:text="${tenant.unit.addressLine1}"></a>
             </div>
 			<!-- <form th:action="@{/users/{userId}/accounts(userId=${user.userId})}" method="post">
 				<h2>Accounts</h2>

@@ -37,7 +37,9 @@ public class LoginController {
 	@GetMapping("/login")
 	public String getUser (ModelMap model) {
 		mServ.createAdmin();
-		model.put("userDTO", new UserDTO());
+		UserDTO userDTO = new UserDTO();
+		System.out.println(userDTO);
+		model.put("userDTO", userDTO);
 		return "login";
 	}
 	
@@ -46,19 +48,15 @@ public class LoginController {
 		System.out.println(user);
 		if (user.getCredential().matches("tenant")) {
 			System.out.println("It's a tenant!");
-			Tenant tenant = tServ.findByUsername(user);
-			model.put("tenant", tenant);
-			return "tenantAccount";
+			Tenant tenant = tServ.findByUsername(user.getUsername());
+			System.out.println(tenant);
+			return "redirect:/tenant/"+tenant.getTenantId();
 		}
 		else if(user.getCredential().matches("manager")) {
 			System.out.println("It's a manager!");
 			Manager manager = mServ.findByUsername(user);
-			List<Tenant> tenants = tServ.findAllTenants();
-			List<Unit> units = uServ.findAllUnits();
-			model.put("manager", manager);
-			model.put("tenants", tenants);
-			model.put("units", units);
-			return "managerAccount";
+			System.out.println(manager);
+			return "redirect:/manager/"+manager.getManagerId();
 		}
 		else {
 			System.out.println("No tenant or manager...");
@@ -81,7 +79,7 @@ public class LoginController {
 		t.setName(user.getName());
 		//t.setManager(mServ.findById(1L));
 		try {	
-			if (tServ.findByUsername(user)!=null) {
+			if (tServ.findByUsername(user.getUsername())!=null) {
 				throw new UserAlreadyExistsException();
 			}
 			else {

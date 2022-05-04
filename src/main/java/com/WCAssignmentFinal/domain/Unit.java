@@ -76,12 +76,14 @@ public class Unit {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
+	
 	@Override
 	public String toString() {
 		return "Unit [unitId=" + unitId + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2
 				+ ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", tenant=" + tenant + ", manager="
 				+ manager + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(addressLine1, addressLine2, city, manager, state, tenant, unitId, zipCode);
