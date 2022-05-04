@@ -24,7 +24,6 @@ Features
     (MVP) View/Update all tenants
     (MVP) Create units
     (MVP) View/Update all units 
-    (MVP) Assign units to tenants
 
 To-do list:
 
@@ -35,6 +34,7 @@ To-do list:
     Request maintenance tickets
 
     Managers can...
+    Assign units to tenants
     View all maintenance tickets
     Mark tickets started/closed
 
