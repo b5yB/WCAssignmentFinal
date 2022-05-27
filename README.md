@@ -15,13 +15,13 @@ Features
 
     Tenants can...
     (MVP) Create/View/Update/Delete tenant account
-     - View associated unit
+     View associated unit
 
     Managers can...
+    (MVP) View/Update manager account
     (MVP) View/Update/Delete tenant accounts
     (MVP) Create/View/Update/Delete units 
-    - Assign units to tenants
-    - View/Update/Delete maintenance tickets
+    Assign units to tenants
 
 To-do list:
 
@@ -32,6 +32,7 @@ To-do list:
     Managers can...
     View payment history
     Mark tickets open/closed
+    View/Update/Delete maintenance tickets
 
 Getting Started
 
