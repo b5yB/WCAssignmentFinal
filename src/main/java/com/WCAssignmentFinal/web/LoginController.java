@@ -1,7 +1,5 @@
 package com.WCAssignmentFinal.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,11 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.WCAssignmentFinal.domain.Manager;
 import com.WCAssignmentFinal.domain.Tenant;
-import com.WCAssignmentFinal.domain.Unit;
 import com.WCAssignmentFinal.domain.UserDTO;
 import com.WCAssignmentFinal.exception.UserAlreadyExistsException;
 import com.WCAssignmentFinal.service.ManagerService;
 import com.WCAssignmentFinal.service.TenantService;
+import com.WCAssignmentFinal.service.TicketService;
 import com.WCAssignmentFinal.service.UnitService;
 
 @Controller
@@ -29,6 +27,9 @@ public class LoginController {
 	@Autowired
 	private UnitService uServ;
 	
+	@Autowired
+	private TicketService ticketServ;
+	
 	@GetMapping("/")
 	public String redirectToLogin () {
 		return "redirect:/login";
@@ -37,6 +38,10 @@ public class LoginController {
 	@GetMapping("/login")
 	public String getUser (ModelMap model) {
 		mServ.createAdmin();
+		//tServ.testTenant();
+		//uServ.testUnit();
+		//ticketServ.testTickets();
+		
 		UserDTO userDTO = new UserDTO();
 		System.out.println(userDTO);
 		model.put("userDTO", userDTO);
@@ -54,7 +59,7 @@ public class LoginController {
 		}
 		else if(user.getCredential().matches("manager")) {
 			System.out.println("It's a manager!");
-			Manager manager = mServ.findByUsername(user);
+			Manager manager = mServ.findByUsername(user.getUsername());
 			System.out.println(manager);
 			return "redirect:/manager/"+manager.getManagerId();
 		}
@@ -77,7 +82,7 @@ public class LoginController {
 		t.setUsername(user.getUsername());
 		t.setPassword(user.getPassword());
 		t.setName(user.getName());
-		//t.setManager(mServ.findById(1L));
+		t.setManager(mServ.findByUsername("admin"));
 		try {	
 			if (tServ.findByUsername(user.getUsername())!=null) {
 				throw new UserAlreadyExistsException();

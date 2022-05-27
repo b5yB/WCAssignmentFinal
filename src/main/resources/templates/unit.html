@@ -22,7 +22,17 @@
 	private Tenant tenant;
 	private Manager manager;-->
 		
-            <div class="well text-center">
+        <div class="well text-center">
+            Address Line 1: <span th:text="${unit.addressLine1}"></span><br/>
+            Address Line 2: <span th:text="${unit.addressLine2}"></span><br/>
+            City: <span th:text="${unit.city}"></span><br/>
+            State: <span th:text="${unit.state}"></span><br/>
+            Zip Code: <span th:text="${unit.zipCode}"></span>
+        <hr/>
+        <a th:href="@{/tenant/{tenantId}(tenantId=${tenant.tenantId})}" th:text="Back" method="get"></a>
+        </div>
+
+            <!-- <div class="well text-center">
                 <form action="" method="post">
                     <div>
                         Address Line 1: <input type="text" th:field="${unit.addressLine1}" />
@@ -36,30 +46,22 @@
                     <div>
                         State: <input type="text" th:field="${unit.state}" />
                     </div>
-                    <div>
+                    <div></div>
                         Zip Code: <input type="text" th:field="${unit.zipCode}" />
-                        <!-- Tenant: <input type="text" th:field="${account.accountName}" /> -->
-                        <!-- Manager: <input type="text" th:field="${account.accountName}" /> -->
+                         Tenant: <input type="text" th:field="${account.accountName}" /> 
+                         Manager: <input type="text" th:field="${account.accountName}" /> 
+
                     </div>
+
                     <div>
                         <input type="submit" value="Save Unit"/>
                     </div>
                 </form>
                 <hr/>
                 <div>
-                    <!-- <a href="/manager/back">Back</a> -->
+                     <a href="/manager/back">Back</a> 
                 </div>
-            </div>
-
-        <!-- <div th:unless="${manager.managerId != null}">
-            <div class="well text-center">
-                <span th:text="${unit.addressLine1}"></span><br/>
-                <span th:text="${unit.addressLine2}"></span><br/>
-                <span th:text="${unit.city}"></span><br/>
-                <span th:text="${unit.state}"></span><br/>
-                <span th:text="${unit.zipCode}"></span>
-            </div>
-		</div> -->
+            </div> -->
 
 	</body>
 </html>

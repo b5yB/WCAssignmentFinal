@@ -4,7 +4,9 @@
 		<title>ShadowREM</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-		<link rel="icon" href="">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+		<link rel="icon" class="bi bi-house">
+		<!-- <i class="bi bi-house"></i> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <!-- <script th:inline="javascript">
@@ -15,40 +17,39 @@
         </script> -->
 	</head>
 	<body>
-		<div class="jumbotron text-center">
-			<h2 th:text= "${tenant.name}"></h2>
-		</div>
+		<!-- <nav class="nav flex-column">
+			<a class="nav-link active" aria-current="page" href="#">Active</a>
+			<a class="nav-link" href="#">Link</a>
+			<a class="nav-link" href="#">Link</a>
+			<a class="nav-link disabled">Disabled</a>
+		</nav> -->
 		
-		<div class="well text-center">
+		<div class="well text-center flex-column">
+			<h2 th:text= "${tenant.name}"></h2>
+			<hr/>
 			<form action="" method="post">
-				<input type="hidden" th:field="${tenantDTO.tenantId}"/>
-				<!-- <input type="hidden" th:field="${tenant.manager.managerId}"/>
-				<input type="hidden" th:field="${tenant.unit.unitId}"/> -->
+				<input type="hidden" th:field="${tenant.tenantId}"/>
+				<!-- <input type="hidden" th:field="${tenant.manager.managerId}"/> -->
+				<!-- <input type="hidden" th:field="${tenant.unit.unitId}"/> -->
+				<div> 
+					Username: <input type="text" th:field="${tenant.username}" required/>
+                </div>
+				<br/>
+                <div> 
+					Name: <input type="text" th:field="${tenant.name}" required/>
+                </div>
+				<br/>
+                <div th:if="${tenant.unit != null}">
+					Unit: <a th:href= "@{/manager/{managerId}/unit/{unitId}(managerId=${manager.managerId}, unitId=${unit.unitId})}" th:text="${unit.addressLine1}" method="get" ></a>
+				</div>
+				<br/>
 				<div>
-					Current Username: [[${tenant.username}]] <br/>
-					New Username: 
-					<input type="text" th:field="${tenantDTO.username}" />
-                </div>
-				<hr/>
-                <div>
-					New Password: 
-					<input type="password" th:field="${tenantDTO.password}" />
-                </div>
-				<hr/>
-                <div>
-                    Current Name: [[${tenant.username}]] <br/>
-					New Name: 
-					<input type="text" th:field="${tenantDTO.name}" />
-                </div>
-				<hr/>
-                <div>
-					Unit: 
 					<select th:field="${tenantDTO.unitId}" class>
-						<option selected value="">Assign a unit...</option>
+						<option selected value="">Assign new unit...</option>
 						<option th:each="unit : ${units}" th:value="${unit.unitId}" th:text="${unit.addressLine1}"></option>
 					</select>
 				</div>
-				<hr/>
+				<br/>
 				<div>
 					<input type="submit" value="Update Tenant" />
 				</div>
@@ -56,8 +57,12 @@
 
             <hr/> 
 
+			<form th:action="@{/manager/{managerId}/tenant/{tenantId}/delete(managerId=${manager.managerId}, tenantId=${tenant.tenantId})}" method="post">
+				<input type="submit" class="btn-danger" value="Delete Tenant" />
+			</form>
+			<hr/>
             <div>
-				<!-- <a href="/manager/">Back</a> -->
+				<a th:href="@{/manager/{managerId}(managerId=${manager.managerId})}" th:text="Back" method="get"></a>
 			</div>
 		</div>
 		    <!-- <form th:action="@{/users/{userId}/delete(userId=${user.userId})}" method="post">

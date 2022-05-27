@@ -16,18 +16,25 @@
         </script> -->
 	</head>
 	<body>
-		<div class="jumbotron text-center">
-			<h2>Hello, [[${manager.name}]]!</h2>
-		</div>
+		<!-- <nav class="nav flex-column">
+			<a class="nav-link active" aria-current="page" href="#">Active</a>
+			<a class="nav-link" href="#">Link</a>
+			<a class="nav-link" href="#">Link</a>
+			<a class="nav-link disabled">Disabled</a>
+		</nav> -->
 		
-		<div class="well text-center">
+		<div class="flex-column text-center">
 			<form action="" method="post">
 				<input type="hidden" th:field="${manager.managerId}"/>
+				
+				<h2>Hello, [[${manager.username}]]!</h2>
+				<br/>
+				<br/>
 				<div>
 					Username: <input type="text" th:field="${manager.username}" />
 				</div>
 				<div>
-					Password: <input type="password" th:field="${manager.password}" />
+					Password: <input type="password" th:field="${manager.password}" required/>
 				</div>
 				<br>
 				<div>
@@ -38,21 +45,31 @@
 			<hr/>
 
 			<form th:action="@{/tenant/new}" method="get">
-				<h2>Tenants</h2>
+				<h3>Tenants</h3>
 				<div th:each="tenant : ${tenants}">
-					<a th:href= "@{/manager/tenant/{tenantId}(tenantId=${tenant.tenantId})}" th:text="${tenant.name}" method="get" ></a>
+					<a th:href= "@{/manager/{managerId}/tenant/{tenantId}(managerId=${manager.managerId}, tenantId=${tenant.tenantId})}" th:text="${tenant.name}" method="get" ></a>
 				</div>
 				<!-- <input type="submit" value="New Tenant" /> -->
 			</form>
 
 			<hr/>
 
-			<form th:action="@{/unit/new}" method="post">
-				<h2>Units</h2>
+			<form th:action="@{/manager/{managerId}/unit/new(managerId=${manager.managerId})}" method="post">
+				<h3>Units</h3>
 				<div th:each="unit : ${units}">
-					<a th:href= "@{/unit/{unitId}(unitId=${unit.unitId})}" th:text="${unit.addressLine1}" method="get" ></a>
+					<a th:href= "@{/manager/{managerId}/unit/{unitId}(managerId=${manager.managerId}, unitId=${unit.unitId})}" th:text="${unit.addressLine1}" method="get" ></a>
 				</div>
 				<input type="submit" value="New Unit" /> 
+			</form>
+
+			<hr/>
+
+			<form th:action="@{/ticket/new}" method="get">
+				<h3>Tickets</h3>
+				<div th:each="ticket : ${tickets}">
+					<a th:href= "@{/manager/{managerId}/ticket/{ticketId}(managerId=${manager.managerId}, ticketId=${ticket.ticketId})}" th:text="${ticket.status}" method="get" ></a>
+				</div>
+				<!-- <input type="submit" value="New Tenant" /> -->
 			</form>
 
 			<hr/>

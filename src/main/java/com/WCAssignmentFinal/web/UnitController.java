@@ -36,7 +36,7 @@ public class UnitController {
 	public String getNewUnit (ModelMap model) {
 		Unit unit = new Unit();
 		//unit.setManager(mServ.findById(1L));
-		uServ.saveUnit(unit);
+		uServ.saveNewUnit(unit);
 		model.put("unit", unit);
 		return "redirect:/unit/"+unit.getUnitId();
 	}
@@ -51,10 +51,14 @@ public class UnitController {
 	@PostMapping("/unit/{unitId}")
 	public String postUnit (@PathVariable Long unitId, Unit unit) {
 		uServ.saveUnit(unit);
-		return "redirect:/manager/"+1;
+		return "redirect:/manager/"+1L;
 	}
 	
-	
+	@PostMapping("/unit/{unitId}/delete")
+	public String deleteUnit (@PathVariable Long unitId) {
+		uServ.deleteUnit(unitId);
+		return "redirect:/manager/"+1L;
+	}
 	
 	
 }

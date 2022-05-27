@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.WCAssignmentFinal.domain.Tenant;
-import com.WCAssignmentFinal.domain.UserDTO;
+import com.WCAssignmentFinal.repository.ManagerRepo;
 import com.WCAssignmentFinal.repository.TenantRepo;
 
 @Service
@@ -14,6 +14,14 @@ public class TenantService {
 	
 	@Autowired
 	private TenantRepo tRepo;
+	
+	@Autowired
+	private ManagerRepo mRepo;
+	
+	public Tenant saveNewTenant (Tenant t) {
+		t.setManager(mRepo.findByUsername("admin"));
+		return tRepo.save(t);
+	}
 
 	public Tenant saveTenant (Tenant t) {
 		return tRepo.save(t);
@@ -39,6 +47,26 @@ public class TenantService {
 	
 	public void deleteTenant (Long tenantId) {
 		tRepo.deleteById(tenantId);
+	}
+
+	public Tenant testTenant() {
+		if (tRepo.findAll().size()!=0) {
+			Tenant tenant = tRepo.findByUsername("test");
+			return tenant;
+		}
+		else {
+			Tenant test = new Tenant();
+			test.setCredential("tenant");
+			test.setUsername("test");
+			test.setPassword("pass");
+			test.setName("test");
+			test.setManager(mRepo.findByUsername("admin"));
+			tRepo.save(test);
+			
+			System.out.println(test);
+	
+			return test;
+		}
 	}
 	
 	

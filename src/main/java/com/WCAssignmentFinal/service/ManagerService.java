@@ -1,5 +1,7 @@
 package com.WCAssignmentFinal.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,12 @@ public class ManagerService {
 	@Autowired
 	private ManagerRepo mRepo;
 	
+	public List<Manager> getAllManagers (){
+		return mRepo.findAll();
+	}
+	
 	public Manager createAdmin() {
-		if (mRepo.findByUsername("admin")!=null) {
+		if (mRepo.findAll().size()!=0) {
 			return mRepo.findByUsername("admin");
 		}
 		else {
@@ -38,8 +44,8 @@ public class ManagerService {
 		return mRepo.findById(managerId).orElse(new Manager());
 	}
 	
-	public Manager findByUsername (UserDTO user) {
-		Manager m = mRepo.findByUsername(user.getUsername());
+	public Manager findByUsername (String username) {
+		Manager m = mRepo.findByUsername(username);
 		if(m != null) {
 			return m;
 		}

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,14 +53,14 @@ public class Manager {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@OneToMany(mappedBy = "manager", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "manager", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	public List<Tenant> getTenants() {
 		return tenants;
 	}
 	public void setTenants(List<Tenant> tenants) {
 		this.tenants = tenants;
 	}
-	@OneToMany(mappedBy = "manager", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "manager", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	public List<Unit> getUnits() {
 		return units;
 	}
@@ -69,11 +70,11 @@ public class Manager {
 	@Override
 	public String toString() {
 		return "Manager [managerId=" + managerId + ", credential=" + credential + ", username=" + username
-				+ ", password=" + password + ", tenants=" + tenants + ", units=" + units + "]";
+				+ ", password=" + password + ", name=" + name + ", tenants=" + tenants + ", units=" + units + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(credential, managerId, password, tenants, units, username);
+		return Objects.hash(credential, managerId, name, password, tenants, units, username);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -85,10 +86,9 @@ public class Manager {
 			return false;
 		Manager other = (Manager) obj;
 		return Objects.equals(credential, other.credential) && Objects.equals(managerId, other.managerId)
-				&& Objects.equals(password, other.password) && Objects.equals(tenants, other.tenants)
-				&& Objects.equals(units, other.units) && Objects.equals(username, other.username);
+				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
+				&& Objects.equals(tenants, other.tenants) && Objects.equals(units, other.units)
+				&& Objects.equals(username, other.username);
 	}
-	
-	
 	
 }

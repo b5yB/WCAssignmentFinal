@@ -1,14 +1,20 @@
 package com.WCAssignmentFinal.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,6 +28,7 @@ public class Unit {
 	private String zipCode;
 	private Tenant tenant;
 	private Manager manager;
+	private List<Ticket> tickets;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getUnitId() {
@@ -60,15 +67,15 @@ public class Unit {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="tenant_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
 	public Tenant getTenant() {
 		return tenant;
 	}
 	public void setTenant(Tenant tenant) {
 		this.tenant = tenant;
 	}
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="manager_id")
 	public Manager getManager() {
 		return manager;
@@ -76,17 +83,24 @@ public class Unit {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
-	
+	@OneToMany(mappedBy = "unit", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
 	@Override
 	public String toString() {
+		//+ ", tenantId=" + tenant.getTenantId()
+		//+ ", manager=" + manager.getManagerId()
 		return "Unit [unitId=" + unitId + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2
-				+ ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", tenant=" + tenant + ", manager="
-				+ manager + "]";
+				+ ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", tickets=" + tickets + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(addressLine1, addressLine2, city, manager, state, tenant, unitId, zipCode);
+		return Objects.hash(addressLine1, addressLine2, city, manager, state, tenant, tickets, unitId, zipCode);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -100,9 +114,8 @@ public class Unit {
 		return Objects.equals(addressLine1, other.addressLine1) && Objects.equals(addressLine2, other.addressLine2)
 				&& Objects.equals(city, other.city) && Objects.equals(manager, other.manager)
 				&& Objects.equals(state, other.state) && Objects.equals(tenant, other.tenant)
-				&& Objects.equals(unitId, other.unitId) && Objects.equals(zipCode, other.zipCode);
+				&& Objects.equals(tickets, other.tickets) && Objects.equals(unitId, other.unitId)
+				&& Objects.equals(zipCode, other.zipCode);
 	}
-	
-	
 	
 }
