@@ -14,25 +14,22 @@ Technologies Used
 Features
 
     Tenants can...
-    (MVP) Create/View/Update/Delete tenant account
-     View associated unit
+     - Create/View/Update/Delete tenant account
+     - View associated unit
 
     Managers can...
-    (MVP) View/Update manager account
-    (MVP) View/Update/Delete tenant accounts
-    (MVP) Create/View/Update/Delete units 
-    Assign units to tenants
+     - View/Update manager account
+     - View/Update/Delete tenant accounts
+     - Create/View/Update/Delete units 
+     - Assign units to tenants
 
 To-do list:
 
     Tenants can...
-    Access payment portal
-    Open maintenance tickets
+     - Create maintenance tickets
 
     Managers can...
-    View payment history
-    Mark tickets open/closed
-    View/Update/Delete maintenance tickets
+     - View/Update/Delete maintenance tickets
 
 Getting Started
 
