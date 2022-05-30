@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
 	<head>
-		<title th:text= "${unit.addressLine1}"></title>
+		<title>ShadowREM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<link rel="icon" href="">
@@ -21,40 +21,51 @@
 	private Unit unit;-->
 		
             <div class="well text-center">
-                <form action="" method="post">
-                    <h4>Please enter new ticket details below:</h4>
-                    <br/>
+                <form id="ticket-form" action="" method="post">
+                    <h4>Please enter details below:</h4>
+                    <hr/>
                     <div>
-                        Type: <input type="text" th:field="${ticket.type}" />
+                        <input type="hidden" th:field="${ticket.ticketId}"/>
+                        <input type="hidden" th:field="${ticket.unit}"/>
+                        <input type="hidden" th:field="${ticket.status}"/>
+
+                        Type: 
+                        <select th:field="${ticket.type}" required>
+                            <option selected th:value="null">Select type...</option>
+                            <option th:value="electrical" th:text="electrical"></option>
+                            <option th:value="plumbing" th:text="plumbing"></option>
+                            <option th:value="appliance" th:text="appliance"></option>
+                            <option th:value="other" th:text="other"></option>
+                        </select>
                     </div>
                     <br/>
                     <div>
-                        Description: <input type="text" th:field="${ticket.}" />
+                        <p>Description:</p> 
+                        <textarea form="ticket-form" th:field="${ticket.description}" required></textarea>
                     </div>
+                    <br/>
                     <div>
-                        Tenant: [[${ticket.tenant.name}]]
+                        Unit: [[${unit.addressLine1}]]
                     </div>
-                    <div>
-                        Unit: [[${ticket.unit.addressLine1}]]
-                    </div>
-                    <div>
+                    <hr/>
+                    <!-- <div>
                         Status: [[${ticket.status}]]
                         <select th:field="${ticket.status}" required>
                         <option selected th:value="null">Set status...</option>
                         <option th:value="open" th:text="open"></option>
                         <option th:value="closed" th:text="closed"></option>
                         </select>
-                        <!-- Tenant: <input type="text" th:field="${account.accountName}" /> -->
-                        <!-- Manager: <input type="text" th:field="${account.accountName}" /> -->
-                    </div>
+                    </div> -->
+                    <!-- Tenant: <input type="text" th:field="${account.accountName}" /> -->
+                    <!-- Manager: <input type="text" th:field="${account.accountName}" /> -->
                     <div>
-                        <input type="submit" value="Update Ticket"/>
+                        <input type="submit" value="Submit Ticket"/>
                     </div>
                 </form>
                 <hr/>
-                <form th:action="@{/ticket/{ticketId}/delete(ticketId=${ticket.ticketId})}" method="post">
+                <!-- <form th:action="@{/ticket/{ticketId}/delete(ticketId=${ticket.ticketId})}" method="post">
                     <input type="submit" class="btn-danger" value="Delete Ticket" />
-                </form>
+                </form> -->
                 <div>
                     <!-- <a href="/manager/back">Back</a> -->
                 </div>

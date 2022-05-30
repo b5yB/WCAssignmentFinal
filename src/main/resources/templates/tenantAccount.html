@@ -19,13 +19,13 @@
 				<!-- <input type="hidden" th:field="${tenant.manager.managerId}"/> -->
 				<!-- <input type="hidden" th:field="${tenant.unit.unitId}"/> -->
 				<div>
-					Username: <input type="text" th:field="${tenant.username}" />
+					Username: <input type="text" th:field="${tenant.username}" required/>
 				</div>
 				<div>
-					Password: <input type="password" th:field="${tenant.password}" />
+					Password: <input type="password" th:field="${tenant.password}" required/>
 				</div>
 				<div>
-					Name: <input type="text" th:field="${tenant.name}" />
+					Name: <input type="text" th:field="${tenant.name}" required/>
 				</div>
 				<br>
 				<div>
@@ -39,13 +39,13 @@
             <div th:if="${tenant.unit!=null}">
 				<h3>Unit:</h3>
                 <a th:href="@{/tenant/{tenantId}/unit/{unitId}(tenantId=${tenant.tenantId}, unitId=${tenant.unit.unitId})}" th:text="${tenant.unit.addressLine1}" method="get"></a>
-            </div>
-			<hr/>
+            <hr/>
 			<h3>Tickets:</h3>
-			<div th:each="ticket : ${tenant.tickets}">
-				<a th:href= "@{tenant/{tenantId}/ticket/{ticketId}(tenantId=${tenant.tenantId}, ticketId=${ticket.ticketId})}" th:text="Ticket ${ticket.ticketId}: ${ticket.status}" method="get" ></a>
+			<div th:each="ticket : ${tenant.unit.tickets}">
+				Ticket [[${ticket.ticketId}]]: <a th:href= "@{/tenant/{tenantId}/ticket/{ticketId}(tenantId=${tenant.tenantId}, ticketId=${ticket.ticketId})}" th:text="${ticket.status}" method="get" ></a>
 			</div>
-			<form th:action="@{/tenant/{tenantId}/ticket/new(tenantId=${tenant.tenantId})}" method="post">
+			<br/>
+			<form th:action="@{/tenant/{tenantId}/ticket(tenantId=${tenant.tenantId})}" method="get">
 				<input type="submit" value="Open New Ticket" />
 			</form>
 			<hr/>

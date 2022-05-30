@@ -67,7 +67,7 @@
 			<form th:action="@{/ticket/new}" method="get">
 				<h3>Tickets</h3>
 				<div th:each="ticket : ${tickets}">
-					<a th:href= "@{/manager/{managerId}/ticket/{ticketId}(managerId=${manager.managerId}, ticketId=${ticket.ticketId})}" th:text="${ticket.status}" method="get" ></a>
+					Ticket [[${ticket.ticketId}]]: <a th:href= "@{/manager/{managerId}/ticket/{ticketId}(managerId=${manager.managerId}, ticketId=${ticket.ticketId})}" th:text="${ticket.status}" method="get" ></a>
 				</div>
 				<!-- <input type="submit" value="New Tenant" /> -->
 			</form>

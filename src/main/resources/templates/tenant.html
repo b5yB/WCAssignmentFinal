@@ -29,8 +29,10 @@
 			<hr/>
 			<form action="" method="post">
 				<input type="hidden" th:field="${tenant.tenantId}"/>
-				<!-- <input type="hidden" th:field="${tenant.manager.managerId}"/> -->
-				<!-- <input type="hidden" th:field="${tenant.unit.unitId}"/> -->
+				<input type="hidden" th:field="${tenant.manager}"/>
+				<input type="hidden" th:field="${tenant.unit}"/>
+				<input type="hidden" th:field="${tenant.password}"/>
+
 				<div> 
 					Username: <input type="text" th:field="${tenant.username}" required/>
                 </div>

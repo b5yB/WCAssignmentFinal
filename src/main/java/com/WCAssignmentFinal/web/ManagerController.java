@@ -178,6 +178,8 @@ public class ManagerController {
 	public String getManagerTicket (ModelMap model, @PathVariable Long ticketId, @PathVariable Long managerId) {
 		Ticket ticket = ticketService.findById(ticketId);
 		Manager manager = mServ.findById(managerId);
+		Unit unit = ticket.getUnit();
+		model.put("unit", unit);
 		model.put("manager", manager);
 		model.put("ticket", ticket);
 		return "managerTicket";

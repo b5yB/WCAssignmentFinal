@@ -24,18 +24,19 @@ public class TicketService {
 	@Autowired
 	private UnitRepo uRepo;
 	
-	public Ticket saveNewTicket(Ticket ticket) {
-		ticket.setStatus("open");
-		return ticketRepo.save(ticket);
+	public Ticket saveNewTicket(Ticket t) {
+		t.setStatus("open");
+		return ticketRepo.save(t);
 	}
 
 	public Ticket saveTicket(Ticket t) {
+		//System.out.println("New ticket: " + t);
 		return ticketRepo.save(t);
 	}
 	
-	public Optional<List<Ticket>> findTicketsByTenantId (Long tenantId){
-		return ticketRepo.findByTenant(tenantRepo.getById(tenantId));
-	}
+//	public Optional<List<Ticket>> findTicketsByTenantId (Long tenantId){
+//		return ticketRepo.findByTenant(tenantRepo.getById(tenantId));
+//	}
 	
 	public Ticket findById (Long ticketId) {
 		return ticketRepo.getById(ticketId);
@@ -49,35 +50,35 @@ public class TicketService {
 		ticketRepo.deleteById(ticketId);
 	}
 
-	public List<Ticket> testTickets() {
-		if (ticketRepo.findAll().size()!=0) {
-			return ticketRepo.findAll();
-		}
-		else {
-			ArrayList<Ticket> testTickets = new ArrayList<Ticket>();
-			Ticket t1 = new Ticket();
-			t1.setType("repair");
-			t1.setStatus("open");
-			t1.setTenant(tenantRepo.getById(1L));
-			t1.setUnit(uRepo.getById(1L));
-			ticketRepo.save(t1);
-			
-			Ticket t2 = new Ticket();
-			t2.setType("misc");
-			t2.setStatus("open");
-			t2.setTenant(tenantRepo.getById(1L));
-			t2.setUnit(uRepo.getById(1L));
-			ticketRepo.save(t2);
-			
-			testTickets.add(t1);
-			testTickets.add(t2);
-			
-			System.out.println(t1);
-			System.out.println(t2);
-			
-			return testTickets;
-		}
-	}
+//	public List<Ticket> testTickets() {
+//		if (ticketRepo.findAll().size()!=0) {
+//			return ticketRepo.findAll();
+//		}
+//		else {
+//			ArrayList<Ticket> testTickets = new ArrayList<Ticket>();
+//			Ticket t1 = new Ticket();
+//			t1.setType("repair");
+//			t1.setStatus("open");
+//			t1.setTenant(tenantRepo.getById(1L));
+//			t1.setUnit(uRepo.getById(1L));
+//			ticketRepo.save(t1);
+//			
+//			Ticket t2 = new Ticket();
+//			t2.setType("misc");
+//			t2.setStatus("open");
+//			t2.setTenant(tenantRepo.getById(1L));
+//			t2.setUnit(uRepo.getById(1L));
+//			ticketRepo.save(t2);
+//			
+//			testTickets.add(t1);
+//			testTickets.add(t2);
+//			
+//			System.out.println(t1);
+//			System.out.println(t2);
+//			
+//			return testTickets;
+//		}
+//	}
 	
 	
 }

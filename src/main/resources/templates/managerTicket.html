@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
 	<head>
-		<title th:text= "${unit.addressLine1}"></title>
+		<title>ShadowREM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<link rel="icon" href="">
@@ -22,8 +22,10 @@
 		
             <div class="well text-center">
                 <form action="" method="post">
-                    
-                    <br/>
+
+                    <input type="hidden" th:field="${ticket.ticketId}"/>
+                    <input type="hidden" th:field="${ticket.unit}"/>
+
                     <div>
                         Type: [[${ticket.type}]]
                     </div>
@@ -32,12 +34,15 @@
                         Description: 
                         <p>[[${ticket.description}]]</p>
                     </div>
+                    <br/>
                     <div>
-                        Tenant: [[${ticket.tenant.name}]]
+                        Tenant: [[${unit.tenant.name}]]
                     </div>
+                    <br/>
                     <div>
-                        Unit: [[${ticket.unit.addressLine1}]]
+                        Unit: [[${unit.addressLine1}]]
                     </div>
+                    <br/>
                     <div>
                         Status: [[${ticket.status}]]
                         <select th:field="${ticket.status}" required>
@@ -48,6 +53,7 @@
                         <!-- Tenant: <input type="text" th:field="${account.accountName}" /> -->
                         <!-- Manager: <input type="text" th:field="${account.accountName}" /> -->
                     </div>
+                    <br/>
                     <div>
                         <input type="submit" value="Update Ticket"/>
                     </div>
@@ -56,8 +62,9 @@
                 <form th:action="@{/ticket/{ticketId}/delete(ticketId=${ticket.ticketId})}" method="post">
                     <input type="submit" class="btn-danger" value="Delete Ticket" />
                 </form>
+                <hr/>
                 <div>
-                    <!-- <a href="/manager/back">Back</a> -->
+                    <a th:href="@{/manager/{managerId}(managerId=${manager.managerId})}" th:text="Back" method="get"></a>
                 </div>
             </div>
 

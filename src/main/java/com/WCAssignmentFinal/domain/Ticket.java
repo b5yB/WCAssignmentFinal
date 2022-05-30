@@ -45,14 +45,14 @@ public class Ticket {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="tenant_id")
-	public Tenant getTenant() {
-		return tenant;
-	}
-	public void setTenant(Tenant tenant) {
-		this.tenant = tenant;
-	}
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name="tenant_id")
+//	public Tenant getTenant() {
+//		return tenant;
+//	}
+//	public void setTenant(Tenant tenant) {
+//		this.tenant = tenant;
+//	}
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="unit_id")
 	public Unit getUnit() {
@@ -64,7 +64,7 @@ public class Ticket {
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", type=" + type + ", description=" + description + ", status=" + status
-				+ ", tenant=" + tenant.getTenantId() + ", unit=" + unit.getUnitId() + "]";
+				+ ", tenant=" + ", unit=" + unit.getUnitId() + "]";
 	}
 	@Override
 	public int hashCode() {

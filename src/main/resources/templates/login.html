@@ -13,33 +13,57 @@
 			<h1>Welcome to ShadowREM!</h1>
 			<br>
 		</div>
-
-		<div class="well text-center">
-			<h4>Please enter login credentials below:</h4>
-			<br>
-			<form action="" method="post" id="login" style="text-align:center">
-				<div>
-					<select th:field="${userDTO.credential}" required>
-					<option selected th:value="null">Select account type...</option>
-					<option th:value="tenant" th:text="Tenant"></option>
-					<option th:value="manager" th:text="Manager"></option>
-					</select>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div>
+						<h4>Suggested demo workflow:</h4>
+						<ul>
+							<li>Create new tenant account</li>
+							<li>Log in with admin credentials</li>
+							<li>Create new unit</li>
+							<li>Assign unit to tenant</li>
+							<li>Log in as tenant</li>
+							<li>Open new ticket</li>
+							<li>View/update/delete info as either user type</li>
+							<hr/>
+						</ul>
+						<h4>Thank you for demoing!</h4>
+					</div>
 				</div>
-				<br>
-				<div>
-					<label for="username">Username: </label> 
-					<input id="username" type="text" th:field="${userDTO.username}" required/>
+				<div class="col">
+					<div class="well text-center">
+						<h4>Please enter login credentials below:</h4>
+						<br>
+						<p class="text-left"></p>
+						<form action="" method="post" id="login" style="text-align:center">
+							<div>
+								<select th:field="${userDTO.credential}" required>
+								<option selected th:value="null">Select account type...</option>
+								<option th:value="tenant" th:text="Tenant"></option>
+								<option th:value="manager" th:text="Manager"></option>
+								</select>
+							</div>
+							<br>
+							<div>
+								<label for="username">Username: </label> 
+								<input id="username" type="text" th:field="${userDTO.username}" required/>
+							</div>
+							<div>
+								<label for="password">Password: </label> 
+								<input id="password" type="password" th:field="${userDTO.password}" required/>
+							</div>
+							<div>
+								<input type="submit" value="Login" />
+							</div>
+						</form>
+						<br> 
+						<a href="/register">Create Account?</a>
+					</div>
 				</div>
-				<div>
-					<label for="password">Password: </label> 
-					<input id="password" type="password" th:field="${userDTO.password}" required/>
+				<div class="col">
 				</div>
-				<div>
-					<input type="submit" value="Login" />
-				</div>
-			</form>
-			<br> 
-			<a href="/register">Create Account?</a>
+			</div>
 		</div>
 		<!-- <script type="text/javascript" src="/login.js"></script> -->
 	</body>

@@ -12,7 +12,7 @@ import com.WCAssignmentFinal.domain.Ticket;
 public interface TicketRepo extends JpaRepository<Ticket, Long> {
 	
 	//@Query("select * from Ticket t" + " where t.tenant.tenant_id = :tenantId")
-	Optional<List<Ticket>> findByTenant(Tenant tenant);
+	//Optional<List<Ticket>> findByTenant(Tenant tenant);
 	
 	
 

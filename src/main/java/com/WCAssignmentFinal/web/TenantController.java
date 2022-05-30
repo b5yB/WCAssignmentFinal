@@ -1,7 +1,7 @@
 package com.WCAssignmentFinal.web;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,47 +73,45 @@ public class TenantController {
 		return "unit";
 	}
 	
-	@PostMapping("/tenant/{tenantId}/ticket/new")
+	@GetMapping("/tenant/{tenantId}/ticket")
 	public String getNewTicket (ModelMap model, @PathVariable Long tenantId) {
 		Tenant tenant = tServ.findById(tenantId);
-		//List<Ticket> tickets = tenant.getTickets();
-		if (tenant.getUnit()!=null) {
-			Unit unit = tenant.getUnit();
-			model.put("unit", unit);
-		}
-		else {
-			Unit newUnit = new Unit();
-			newUnit.setAddressLine1("NoUnitFound");
-			newUnit.setManager(tenant.getManager());
-			newUnit.setTenant(tenant);
-			uServ.saveUnit(newUnit);
-			model.put("unit", newUnit);
-		}
-		Ticket ticket= new Ticket();
-		ticket.setTenant(tServ.findById(tenantId));
-		ticket.setUnit(tenant.getUnit());
-		//unit.setManager(mServ.findById(1L));
-		ticketServ.saveNewTicket(ticket);
-		//tickets.add(ticket);
+		Ticket ticket = new Ticket();
+		Unit unit = tenant.getUnit();
+		List<Ticket> tickets = unit.getTickets();
+		
+		//ticket.setTenant(tenant);
+		ticket.setUnit(unit);
+		ticket.setStatus("open");
+		
+		tickets.add(ticket);
+		unit.setTickets(tickets);
 		//tenant.setTickets(tickets);
+		
 		//tServ.saveTenant(tenant);
-		//model.put("ticket", ticket);
-		return "redirect:/tenant/" + tenantId + "/ticket/" + ticket.getTicketId();
+		uServ.saveUnit(unit);
+		ticketServ.saveTicket(ticket);
+		
+
+		model.put("tenant", tenant);
+		model.put("unit", unit);
+		model.put("ticket", ticket);
+		return "ticket";
+	}
+	
+	@PostMapping("/tenant/{tenantId}/ticket")
+	public String postTicket (@PathVariable Long tenantId, Ticket ticket) {
+		ticketServ.saveTicket(ticket);
+		return "redirect:/tenant/" + tenantId;
 	}
 	
 	@GetMapping("/tenant/{tenantId}/ticket/{ticketId}")
-	public String getTenantTickets (ModelMap model, @PathVariable Long tenantId, @PathVariable Long ticketId) {
+	public String getTenantTicket (ModelMap model, @PathVariable Long tenantId, @PathVariable Long ticketId) {
 		Tenant tenant = tServ.findById(tenantId);
 		Ticket ticket = ticketServ.findById(ticketId);
 		model.put("tenant", tenant);
 		model.put("ticket", ticket);
 		return "tenantTicket";
-	}
-	
-	@PostMapping("/tenant/{tenantId}/ticket/{ticketId}")
-	public String postTicket (@PathVariable Long tenantId, @PathVariable Long ticketId, Ticket ticket) {
-		ticketServ.saveTicket(ticket);
-		return "redirect:/tenant/" + tenantId;
 	}
 	
 	@PostMapping("/tenant/{tenantId}/ticket/{ticketId}/delete")

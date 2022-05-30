@@ -75,18 +75,17 @@ public class Tenant {
 	public void setUnit(Unit unit) {
 		this.unit = unit;
 	}
-	@OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	public List<Ticket> getTickets() {
-		return tickets;
-	}
-	public void setTickets(List<Ticket> tickets) {
-		this.tickets = tickets;
-	}
+//	@OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	public List<Ticket> getTickets() {
+//		return tickets;
+//	}
+//	public void setTickets(List<Ticket> tickets) {
+//		this.tickets = tickets;
+//	}
 	@Override
 	public String toString() {
 		return "Tenant [tenantId=" + tenantId + ", credential=" + credential + ", username=" + username + ", password="
-				+ password + ", name=" + name + ", manager=" + manager.getManagerId() + ", unit=" + unit + ", tickets=" + tickets
-				+ "]";
+				+ password + ", name=" + name + ", manager=" + manager.getManagerId() + ", unit=" + unit + "]";
 	}
 	@Override
 	public int hashCode() {
