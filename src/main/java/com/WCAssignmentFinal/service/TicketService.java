@@ -24,13 +24,13 @@ public class TicketService {
 	@Autowired
 	private UnitRepo uRepo;
 	
-	public Ticket saveNewTicket(Ticket t) {
-		t.setStatus("open");
-		return ticketRepo.save(t);
-	}
+//	public Ticket saveNewTicket(Ticket t) {
+//		t.setStatus("open");
+//		return ticketRepo.save(t);
+//	}
 
 	public Ticket saveTicket(Ticket t) {
-		//System.out.println("New ticket: " + t);
+		System.out.println("Saving ticket: " + t);
 		return ticketRepo.save(t);
 	}
 	

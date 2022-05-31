@@ -9,60 +9,62 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 	</head>
 	<body>
-		<div class="jumbotron text-center">
-			<h1>Welcome to ShadowREM!</h1>
-			<br>
-		</div>
 		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div>
-						<h4>Suggested demo workflow:</h4>
-						<ul>
-							<li>Create new tenant account</li>
-							<li>Log in with admin credentials</li>
-							<li>Create new unit</li>
-							<li>Assign unit to tenant</li>
-							<li>Log in as tenant</li>
-							<li>Open new ticket</li>
-							<li>View/update/delete info as either user type</li>
-							<hr/>
-						</ul>
-						<h4>Thank you for demoing!</h4>
-					</div>
+
+			<div class="row align-items-start">
+				<div class="jumbotron text-center">
+					<h1>Welcome to ShadowREM!</h1>
+					<br>
 				</div>
+			</div>
+
+			<div class="row align-items-start">
+
 				<div class="col">
-					<div class="well text-center">
-						<h4>Please enter login credentials below:</h4>
+				</div>
+
+				<div class="col text-center">
+					<h4>Please enter login credentials below:</h4>
+					<br/>
+					<form action="" method="post" id="login" style="text-align:center">
+						<div>
+							<select th:field="${userDTO.credential}" required>
+							<option selected th:value="null">Select account type...</option>
+							<option th:value="tenant" th:text="Tenant"></option>
+							<option th:value="manager" th:text="Manager"></option>
+							</select>
+						</div>
 						<br>
-						<p class="text-left"></p>
-						<form action="" method="post" id="login" style="text-align:center">
-							<div>
-								<select th:field="${userDTO.credential}" required>
-								<option selected th:value="null">Select account type...</option>
-								<option th:value="tenant" th:text="Tenant"></option>
-								<option th:value="manager" th:text="Manager"></option>
-								</select>
-							</div>
-							<br>
-							<div>
-								<label for="username">Username: </label> 
-								<input id="username" type="text" th:field="${userDTO.username}" required/>
-							</div>
-							<div>
-								<label for="password">Password: </label> 
-								<input id="password" type="password" th:field="${userDTO.password}" required/>
-							</div>
-							<div>
-								<input type="submit" value="Login" />
-							</div>
-						</form>
-						<br> 
-						<a href="/register">Create Account?</a>
-					</div>
+						<div>
+							<label for="username">Username: </label> 
+							<input id="username" type="text" th:field="${userDTO.username}" required/>
+						</div>
+						<div>
+							<label for="password">Password: </label> 
+							<input id="password" type="password" th:field="${userDTO.password}" required/>
+						</div>
+						<div>
+							<input type="submit" value="Login" />
+						</div>
+					</form>
+					<br/> 
+					<a href="/register">Create Account?</a>
 				</div>
-				<div class="col">
+				<br/>
+				<div class="col well text-left">
+					<h4>Suggested demo workflow:</h4>
+					<ul>
+						<li>Create new tenant account</li>
+						<li>Log in with admin credentials ("admin", "pass")</li>
+						<li>Create new unit</li>
+						<li>Assign unit to tenant</li>
+						<li>Log in as tenant</li>
+						<li>Open new ticket</li>
+					</ul>
+					<br/>
+					<h4>Thank you for demoing!</h4>
 				</div>
+
 			</div>
 		</div>
 		<!-- <script type="text/javascript" src="/login.js"></script> -->

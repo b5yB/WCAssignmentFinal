@@ -43,7 +43,6 @@ public class LoginController {
 		//ticketServ.testTickets();
 		
 		UserDTO userDTO = new UserDTO();
-		System.out.println(userDTO);
 		model.put("userDTO", userDTO);
 		return "login";
 	}
@@ -52,20 +51,28 @@ public class LoginController {
 	public String postUser (ModelMap model, UserDTO user) {
 		System.out.println(user);
 		if (user.getCredential().matches("tenant")) {
-			System.out.println("It's a tenant!");
 			Tenant tenant = tServ.findByUsername(user.getUsername());
-			System.out.println(tenant);
-			return "redirect:/tenant/"+tenant.getTenantId();
+			if(tenant == null) {
+				return "loginError";
+			}
+			else {
+				System.out.println("Logging in: " + tenant);
+				return "redirect:/tenant/"+tenant.getTenantId();
+			}
 		}
 		else if(user.getCredential().matches("manager")) {
-			System.out.println("It's a manager!");
 			Manager manager = mServ.findByUsername(user.getUsername());
-			System.out.println(manager);
-			return "redirect:/manager/"+manager.getManagerId();
+			if (manager == null) {
+				return "loginError";
+			}
+			else {
+				System.out.println("Logging in: " + manager);
+				return "redirect:/manager/"+manager.getManagerId();
+			}
 		}
 		else {
-			System.out.println("No tenant or manager...");
-			return "redirect:/login";
+			System.out.println("No credential selected.");
+			return "loginError";
 		}
 	}
 	

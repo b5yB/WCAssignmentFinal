@@ -39,23 +39,24 @@
             <div th:if="${tenant.unit!=null}">
 				<h3>Unit:</h3>
                 <a th:href="@{/tenant/{tenantId}/unit/{unitId}(tenantId=${tenant.tenantId}, unitId=${tenant.unit.unitId})}" th:text="${tenant.unit.addressLine1}" method="get"></a>
-            <hr/>
-			<h3>Tickets:</h3>
-			<div th:each="ticket : ${tenant.unit.tickets}">
-				Ticket [[${ticket.ticketId}]]: <a th:href= "@{/tenant/{tenantId}/ticket/{ticketId}(tenantId=${tenant.tenantId}, ticketId=${ticket.ticketId})}" th:text="${ticket.status}" method="get" ></a>
-			</div>
-			<br/>
-			<form th:action="@{/tenant/{tenantId}/ticket(tenantId=${tenant.tenantId})}" method="get">
-				<input type="submit" value="Open New Ticket" />
-			</form>
-			<hr/>
-			<!-- <form th:action="@{/users/{userId}/accounts(userId=${user.userId})}" method="post">
+				<hr/>
+				<h3>Tickets:</h3>
+				<div th:each="ticket : ${tenant.unit.tickets}">
+					Ticket [[${ticket.ticketId}]]: <a th:href= "@{/tenant/{tenantId}/ticket/{ticketId}(tenantId=${tenant.tenantId}, ticketId=${ticket.ticketId})}" th:text="${ticket.status}" method="get" ></a>
+				</div>
+				<br/>
+				<form th:action="@{/tenant/{tenantId}/ticket(tenantId=${tenant.tenantId})}" method="get">
+					<input type="submit" value="Open New Ticket" />
+				</form>
+				<hr/>
+				<!-- <form th:action="@{/users/{userId}/accounts(userId=${user.userId})}" method="post">
 				<h2>Accounts</h2>
 				<div th:each="account : ${user.accounts}">
 					<a th:href= "@{/users/{userId}/accounts/{accountId}(userId=${user.userId}, accountId=${account.accountId})}" th:text="${account.accountName}" method ></a>
 				</div>
 				<input type="submit" value="Open New Account" />
-			</form> -->
+				</form> -->
+			</div>
 			<form th:action="@{/tenant/{tenantId}/delete(tenantId=${tenant.tenantId})}" method="post">
 				<input type="submit" class="btn-danger" value="Delete Account" />
 			</form>

@@ -27,8 +27,9 @@ public class TicketController {
 	@PostMapping("/ticket/new")
 	public String getNewTicket (ModelMap model) {
 		Ticket ticket= new Ticket();
+		ticket.setStatus("open");
 		//unit.setManager(mServ.findById(1L));
-		ticketServ.saveNewTicket(ticket);
+		ticketServ.saveTicket(ticket);
 		//model.put("ticket", ticket);
 		return "redirect:/ticket/"+ticket.getTicketId();
 	}

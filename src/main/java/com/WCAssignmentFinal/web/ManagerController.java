@@ -69,10 +69,14 @@ public class ManagerController {
 	public String getTenant (ModelMap model, @PathVariable Long managerId, @PathVariable Long tenantId) {
 		Manager manager = mServ.findById(managerId);
 		Tenant tenant = tServ.findById(tenantId);
-		TenantDTO tenantDTO = new TenantDTO();
+		//TenantDTO tenantDTO = new TenantDTO();
 		List<Unit> units = uServ.findAllUnits();
 		if(tenant.getUnit() != null) {
 			Unit unit = tenant.getUnit();
+			model.put("unit", unit);
+		}
+		else {
+			Unit unit = new Unit();
 			model.put("unit", unit);
 		}
 		//System.out.println(tenant);
@@ -80,35 +84,33 @@ public class ManagerController {
 		//System.out.println(units);
 		model.put("manager", manager);
 		model.put("tenant", tenant);
-		model.put("tenantDTO", tenantDTO);
+		//model.put("tenantDTO", tenantDTO);
 		model.put("units", units);
 		return "tenant";
 	}
 	
 	@PostMapping("/manager/{managerId}/tenant/{tenantId}")
 	public String postTenant (ModelMap model, @PathVariable Long managerId, @PathVariable Long tenantId,
-								Tenant newTenant, TenantDTO tenantDTO) {
+								Tenant newTenant, Unit onlyUnitId) {
 		//Manager manager = mServ.findById(managerId);
 		Tenant tenant = tServ.findById(tenantId);
-		
-		if (tenantDTO.getUnitId()!=null) {
-			Unit unit = uServ.findById(tenantDTO.getUnitId());
-			tenant.setUnit(unit);
-			unit.setTenant(tenant);
-			uServ.saveUnit(unit);
-			tenantDTO.setUnitId(null);
-		}
+		Unit unit = uServ.findById(onlyUnitId.getUnitId());
 		
 		tenant.setUsername(newTenant.getUsername());
 		tenant.setName(newTenant.getName());
+		
+		if (unit!=null) {
+			unit.setTenant(tenant);
+			tenant.setUnit(unit);
+			uServ.saveUnit(unit);
+		}
 		
 		tServ.saveTenant(tenant);
 		
 		List<Unit> units = uServ.findAllUnits();
 		List<Tenant> tenants = tServ.findAllTenants();
 		
-		System.out.println(tenant);
-		System.out.println(tenants);
+		System.out.println("Saving: " + tenant);
 		
 		model.put("tenants", tenants);
 		model.put("units", units);

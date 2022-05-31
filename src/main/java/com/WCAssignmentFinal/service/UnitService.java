@@ -23,13 +23,14 @@ public class UnitService {
 	@Autowired
 	private ManagerRepo mRepo;
 	
-	public Unit saveNewUnit (Unit u) {
-		//u.setManager(mRepo.findByUsername("admin"));
-		//u.setTenant(tRepo.findByUsername("test"));
-		return uRepo.save(u);
-	}
+//	public Unit saveNewUnit (Unit u) {
+//		//u.setManager(mRepo.findByUsername("admin"));
+//		//u.setTenant(tRepo.findByUsername("test"));
+//		return uRepo.save(u);
+//	}
 	
 	public Unit saveUnit (Unit u) {
+		System.out.println("Saving: " + u);
 		return uRepo.save(u);
 	}
 	

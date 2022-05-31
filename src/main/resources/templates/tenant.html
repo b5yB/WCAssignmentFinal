@@ -30,28 +30,32 @@
 			<form action="" method="post">
 				<input type="hidden" th:field="${tenant.tenantId}"/>
 				<input type="hidden" th:field="${tenant.manager}"/>
-				<input type="hidden" th:field="${tenant.unit}"/>
+				<!-- <input type="hidden" th:field="${tenant.unit}"/> -->
 				<input type="hidden" th:field="${tenant.password}"/>
 
 				<div> 
 					Username: <input type="text" th:field="${tenant.username}" required/>
                 </div>
 				<br/>
+
                 <div> 
 					Name: <input type="text" th:field="${tenant.name}" required/>
                 </div>
 				<br/>
+
                 <div th:if="${tenant.unit != null}">
 					Unit: <a th:href= "@{/manager/{managerId}/unit/{unitId}(managerId=${manager.managerId}, unitId=${unit.unitId})}" th:text="${unit.addressLine1}" method="get" ></a>
 				</div>
 				<br/>
+
 				<div>
-					<select th:field="${tenantDTO.unitId}" class>
+					<select th:field="${unit.unitId}" required>
 						<option selected value="">Assign new unit...</option>
 						<option th:each="unit : ${units}" th:value="${unit.unitId}" th:text="${unit.addressLine1}"></option>
 					</select>
-				</div>
+				</div> 
 				<br/>
+
 				<div>
 					<input type="submit" value="Update Tenant" />
 				</div>

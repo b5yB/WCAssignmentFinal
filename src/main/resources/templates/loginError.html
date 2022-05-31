@@ -15,26 +15,8 @@
 		</div>
 
 		<div class="well text-center">
-			<h4>Create a tenant account:</h4>
-			<br>
-			<form action="" method="post" id="register">
-				<div>
-					<label for="username">Username: </label> 
-					<input id="username" type="text" th:field="${userDTO.username}" required/>
-				</div>
-				<div>
-					<label for="password">Password: </label> 
-					<input id="password" type="password" th:field="${userDTO.password}" required/>
-				</div>
-				<div>
-					<label for="name">Name: </label> 
-					<input id="name" type="text" th:field="${userDTO.name}" required/>
-				</div>
-				<div>
-					<input type="submit" value="Create" />
-				</div>
-			</form>
-			<br>
+			<h4>Incorrect login credentials... please try again!</h4>
+			<hr/>
 			<!-- <a href="/login">Back</a> -->
 			<a th:href="@{/login}" th:text="Back" method="get"></a>
 		</div>

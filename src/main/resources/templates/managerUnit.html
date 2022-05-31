@@ -25,23 +25,50 @@
 		
             <div class="well text-center">
                 <form action="" method="post">
+                    <input type="hidden" th:field="${unit.unitId}"/>
+                    <input type="hidden" th:field="${unit.tenant}"/>
+                    <input type="hidden" th:field="${unit.manager}"/>
+
                     <div>
                         Address Line 1: <input type="text" th:field="${unit.addressLine1}" />
                     </div>
+                    <br/>
+                    
                     <div>
                         Address Line 2: <input type="text" th:field="${unit.addressLine2}" />
                     </div>
+                    <br/>
+
                     <div>
                         City: <input type="text" th:field="${unit.city}" />
                     </div>
+                    <br/>
+
                     <div>
                         State: <input type="text" th:field="${unit.state}" />
                     </div>
+                    <br/>
+
                     <div>
                         Zip Code: <input type="text" th:field="${unit.zipCode}" />
                         <!-- Tenant: <input type="text" th:field="${account.accountName}" /> -->
                         <!-- Manager: <input type="text" th:field="${account.accountName}" /> -->
                     </div>
+                    <br/>
+
+                    <!-- <div th:if="${unit.addressLine1==null}">
+					<select th:field="${unit.tenant}" required>
+						<option selected value="null">Assign tenant...</option>
+						<option th:each="tenant : ${tenants}" th:value="${tenant}" th:text="${tenant.name}"></option>
+					</select>
+                    <br/>
+				    </div> -->
+
+                    <!-- <div th:if="${unit.tenant!=null}">
+                        Tenant: 
+                    </div> 
+				    <br/> -->
+
                     <div>
                         <input type="submit" value="Save Unit"/>
                     </div>

@@ -38,11 +38,11 @@ public class TenantController {
 	}
 	
 	@PostMapping("/tenant/{tenantId}")
-	public String postTenant (ModelMap model, @PathVariable Long tenantId, Tenant tenantDTO) {
+	public String postTenant (ModelMap model, @PathVariable Long tenantId, Tenant newTenant) {
 		Tenant tenant = tServ.findById(tenantId);
-		tenant.setUsername(tenantDTO.getUsername());
-		tenant.setPassword(tenantDTO.getPassword());
-		tenant.setName(tenantDTO.getName());
+		tenant.setUsername(newTenant.getUsername());
+		tenant.setPassword(newTenant.getPassword());
+		tenant.setName(newTenant.getName());
 		tServ.saveTenant(tenant);
 		//System.out.println(tenant);
 		model.put("tenant", tenant);
@@ -81,16 +81,16 @@ public class TenantController {
 		List<Ticket> tickets = unit.getTickets();
 		
 		//ticket.setTenant(tenant);
+		//tenant.setTickets(tickets);
+		//tServ.saveTenant(tenant);
+		
 		ticket.setUnit(unit);
 		ticket.setStatus("open");
+		ticketServ.saveTicket(ticket);
 		
 		tickets.add(ticket);
 		unit.setTickets(tickets);
-		//tenant.setTickets(tickets);
-		
-		//tServ.saveTenant(tenant);
 		uServ.saveUnit(unit);
-		ticketServ.saveTicket(ticket);
 		
 
 		model.put("tenant", tenant);

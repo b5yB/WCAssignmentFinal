@@ -18,12 +18,13 @@ public class TenantService {
 	@Autowired
 	private ManagerRepo mRepo;
 	
-	public Tenant saveNewTenant (Tenant t) {
-		t.setManager(mRepo.findByUsername("admin"));
-		return tRepo.save(t);
-	}
+//	public Tenant saveNewTenant (Tenant t) {
+//		t.setManager(mRepo.findByUsername("admin"));
+//		return tRepo.save(t);
+//	}
 
 	public Tenant saveTenant (Tenant t) {
+		System.out.println("Saving: " + t);
 		return tRepo.save(t);
 	}
 	
