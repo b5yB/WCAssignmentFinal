@@ -35,10 +35,11 @@
                         <p>[[${ticket.description}]]</p>
                     </div>
                     <br/>
-                    <div>
-                        Tenant: [[${unit.tenant.name}]]
+
+                    <div th:if="${unit.tenant!=null}">
+                        Tenant: <a th:href= "@{/manager/{managerId}/tenant/{tenantId}(managerId=${unit.manager.managerId}, tenantId=${unit.tenant.tenantId})}" th:text="${unit.tenant.name}" method="get" ></a>
+                        <br/>
                     </div>
-                    <br/>
                     <div>
                         Unit: [[${unit.addressLine1}]]
                     </div>

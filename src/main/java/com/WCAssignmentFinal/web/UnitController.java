@@ -35,7 +35,7 @@ public class UnitController {
 	@PostMapping("/unit/new")
 	public String getNewUnit (ModelMap model) {
 		Unit unit = new Unit();
-		unit.setManager(mServ.findByUsername("admin"));
+		unit.setManager(mServ.findById(1L));
 		uServ.saveUnit(unit);
 		model.put("unit", unit);
 		return "redirect:/unit/"+unit.getUnitId();

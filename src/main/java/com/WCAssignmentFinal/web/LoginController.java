@@ -89,7 +89,7 @@ public class LoginController {
 		t.setUsername(user.getUsername());
 		t.setPassword(user.getPassword());
 		t.setName(user.getName());
-		t.setManager(mServ.findByUsername("admin"));
+		t.setManager(mServ.findById(1L));
 		try {	
 			if (tServ.findByUsername(user.getUsername())!=null) {
 				throw new UserAlreadyExistsException();
