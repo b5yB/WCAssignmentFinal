@@ -16,20 +16,20 @@ Features
     Tenants can...
      - Create/View/Update/Delete tenant account
      - View associated unit
+     - Create maintenance tickets
 
     Managers can...
      - View/Update manager account
      - View/Update/Delete tenant accounts
      - Create/View/Update/Delete units 
      - Assign units to tenants
+     - View/Update/Delete maintenance tickets
 
 To-do list:
 
     Tenants can...
-     - Create maintenance tickets
 
     Managers can...
-     - View/Update/Delete maintenance tickets
 
 Getting Started
 
@@ -40,7 +40,7 @@ Getting Started
 
 Usage
 
-    As of this release, a tenant account can be created from the landing page by clicking on "create account".
+    As of this release, a tenant account can be created from the landing page by clicking "create account".
     To access the tenant features select "tenant" from the account type drop down and log in with above created credentials. 
     Intentionally, a manager account cannot be created in the same way. 
     Instead, an admin account has been created to access manager features. 
